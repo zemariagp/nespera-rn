@@ -2,10 +2,10 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
-import { AppRegistry, Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Provider as PaperProvider } from 'react-native-paper';
-
+import { StateProvider } from "./store/store";
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
@@ -27,7 +27,16 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <PaperProvider><AppNavigator /></PaperProvider>
+        <PaperProvider>
+
+          <StateProvider>
+            <AppNavigator />
+          </StateProvider>
+
+
+
+
+        </PaperProvider>
 
       </View>
     );
