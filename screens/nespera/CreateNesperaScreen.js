@@ -15,7 +15,7 @@ const CreateNesperaScreen = (props) => {
   
 
 
-  Firebase.database().ref('nesperas/').set({
+  Firebase.database().ref('nesperas/').push({
     authorId: user.state.user,
     title: title,
     opA : opA,
