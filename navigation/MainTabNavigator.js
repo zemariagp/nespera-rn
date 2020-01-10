@@ -10,6 +10,7 @@ import SingleNesperaScreen from "../screens/nespera/SingleNesperaScreen";
 import StatsScreen from "../screens/nespera/StatsScreen";
 
 import MyNesperasScreen from "../screens/user/MyNesperasScreen";
+import CreateNesperaScreen from "../screens/nespera/CreateNesperaScreen";
 
 import ProfileScreen from "../screens/user/ProfileScreen";
 import EditUserInfoScreen from "../screens/user/EditUserInfoScreen";
@@ -46,7 +47,8 @@ NesperasStack.path = "";
 
 const MyNesperasStack = createStackNavigator(
   {
-    MyNesperas: MyNesperasScreen
+    MyNesperas: MyNesperasScreen,
+    CreateNew:CreateNesperaScreen
   },
   config
 );

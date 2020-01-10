@@ -22,7 +22,7 @@ const TestScreen = (props) => {
 
   const handleLogin = () => {
     Firebase.auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email.trim(), password.trim())
       .then((res) => {
         dispatch({ type: 'firebase auth success', payload: res });
         props.navigation.navigate("Main");

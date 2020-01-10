@@ -9,6 +9,7 @@ const StateProvider = ({ children }) => {
     switch (action.type) {
 
       case "firebase auth success":
+        
         const newState = { user: action.payload.user.uid }
         console.log(newState);
         return newState;
@@ -21,3 +22,4 @@ const StateProvider = ({ children }) => {
 };
 
 export { store, StateProvider }
+
