@@ -22,16 +22,18 @@ const NesperasScreen = props => {
   const [nespera, setNespera] = useState([]);
 
   useEffect(() => {
-    const getNesperas = () => {
-      Firebase.database()
-        .ref("nesperas")
-        .on("value", function(snapshot) {
-          let data = snapshot.val();
-          let dataNesperas = Object.values(data);
-          setNespera(dataNesperas);
+    // Create an scoped async function in the hook
+    function getUser() {
+      fetch("https://nespera.herokuapp.com/api/top")
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(json) {
+          setNespera(json);
         });
-    };
-    getNesperas();
+    }
+
+    getUser();
 
     console.log(nespera);
     // Execute the created function directly
@@ -47,12 +49,9 @@ const NesperasScreen = props => {
         renderItem={itemData => (
           <CustomListItem
             title={itemData.item.title}
-            author={itemData.item.authorId}
+            author={itemData.item.authorID}
             goToSingle={() => {
-              props.navigation.navigate("Single", {
-                data: itemData.item,
-                title: itemData.item.title
-              });
+              props.navigation.navigate({ routeName: "Single" });
             }}
           />
         )}
