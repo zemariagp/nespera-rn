@@ -19,36 +19,45 @@ const CustomListItem = (props) => (
 
 const NesperasScreen = (props) => {
   
-  // const [nespera,setNespera] = useState(null);
+   const [nespera,setNespera] = useState([]);
   
-   const getNesperasFromDatabase = async ()=>{
-    const response = await fetch("https://nespera-final.firebaseio.com/nesperas.json");
-    const resData = await response.json();
-    let retrievedNesperas = [];
-   for (const key in resData) {
-     //console.log(resData[key]);
-     retrievedNesperas = [...retrievedNesperas,(resData[key])];
+   
+  useEffect(() => {
+    // Create an scoped async function in the hook
+    async function anyNameFunction() {
+      const y = await Firebase.database().ref('nesperas').once("value").then(function(data) {return data})
+      
+      let final = [];
+      for (const key in y) {
+        console.log(y[key]);
+        final.push(y[key]);
+      }
+      
+      console.log("asd",final)
+    setNespera(final);
+    }
+    // Execute the created function directly
+    anyNameFunction();
+  }, []);
+ 
+    
 
-   }
-
-    console.log(retrievedNesperas);
-        
-  }
-
-
-
-
-useEffect(()=>getNesperasFromDatabase(),[getNesperasFromDatabase]);
   return (
     <View style={styles.container}>
       <Button mode="contained">AO CALHAS</Button>
 
       <Text>As mais respondidas</Text>
-     {/*  <FlatList data={nespera}
+      <FlatList data={nespera}
         renderItem={(itemData) =>
           <CustomListItem title={itemData.item.title}
-            authorId={itemData.item.authorId}
-            goToSingle={() => { props.navigation.navigate({ routeName: "Single" }); }} />} /> */}
+            authorId={itemData.authorId}
+            goToSingle={() => { props.navigation.navigate({ routeName: "Single" }); }} />} />
+
+
+      
+      
+   
+    
     </View>
   )
 }
