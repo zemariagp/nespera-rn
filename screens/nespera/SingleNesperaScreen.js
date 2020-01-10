@@ -7,7 +7,6 @@ const SingleNesperaScreen = props => {
 
   return (
     <View>
-      <Text>{nespera.title}</Text>
       <Text>Preferias</Text>
       <Button
         onPress={() => {
