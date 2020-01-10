@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import { Button, List } from "react-native-paper";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Firebase from "../../config/Firebase";
 
-const CustomListItem = (props) => (
-  <TouchableOpacity onPress={() => { props.goToSingle() }}>
-    <List.Item
-      title={props.title}
-      description={`by ${props.author}`}
-      right={() => <Text>{props.answers}</Text>}
-    />
-  </TouchableOpacity>
-)
+const CustomListItem = (props) => {
+
+  const nesperaData = props.nesperaData
+  return (
+
+    <TouchableOpacity onPress={() => { props.goToSingle(nesperaData) }}>
+      <List.Item
+        title={nesperaData.title}
+        description={`by ${nesperaData.authorID}`}
+
+      />
+    </TouchableOpacity>
+  )
+}
 
 
 
@@ -37,7 +41,6 @@ const NesperasScreen = (props) => {
     getUser();
 
 
-    // Execute the created function directly
 
   }, []);
 
@@ -48,11 +51,11 @@ const NesperasScreen = (props) => {
       <Button mode="contained">AO CALHAS</Button>
 
       <Text>As mais respondidas</Text>
-      <FlatList data={nespera}
+      <FlatList data={nespera} keyExtractor={(el) => el["_id"]}
         renderItem={(itemData) =>
-          <CustomListItem title={itemData.item.title}
-            authorId={itemData.authorID}
-            goToSingle={() => { props.navigation.navigate({ routeName: "Single" }); }} />} />
+          <CustomListItem nesperaData={itemData.item}
+            goToSingle={
+              (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData })} />} />
 
 
 
