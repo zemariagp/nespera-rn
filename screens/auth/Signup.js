@@ -1,88 +1,72 @@
-import React from 'react'
-import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
+
+import React, { useContext, useState } from 'react';
+import { store } from '../../store/store';
+import { View, StyleSheet, Text } from "react-native";
+import { TextInput, Button } from 'react-native-paper';
 import Firebase from "../../config/Firebase";
 
-class Signup extends React.Component {
-  state = {
-    name: '',
-    email: '',
-    password: ''
+
+
+const TestScreen = (props) => {
+  const globalState = useContext(store);
+  const { dispatch } = globalState;
+
+
+  const [email, setEmail] = useState("");
+  const handleEmailInput = (email) => {
+    setEmail(email);
+  }
+  const [password, setPassword] = useState("");
+  const handlePasswordInput = (password) => {
+    setPassword(password);
   }
 
-  handleSignUp = () => {
-    const { email, password } = this.state
+  const [name, setName] = useState("");
+  const handleNameInput = (name) => {
+    setName(name);
+  }
+
+  const handleLogin = () => {
     Firebase.auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((res) => this.props.navigation.navigate('Profile'))
+      .then((res) => {
+        dispatch({ type: 'firebase auth success', payload: res })
+        props.navigation.navigate("Main");
+      })
       .catch(error => console.log(error))
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.inputBox}
-          value={this.state.name}
-          onChangeText={name => this.setState({ name })}
-          placeholder='Full Name'
-        />
-        <TextInput
-          style={styles.inputBox}
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
-          placeholder='Email'
-          autoCapitalize='none'
-        />
-        <TextInput
-          style={styles.inputBox}
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-          placeholder='Password'
-          secureTextEntry={true}
-        />
-        <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
-          <Text style={styles.buttonText}>Signup</Text>
-        </TouchableOpacity>
+
+
+  return (
+    <View style={styles.container}>
+
+      <TextInput label="name" onChangeText={handleNameInput}></TextInput>
+      <TextInput label="email" onChangeText={handleEmailInput}></TextInput>
+      <TextInput label="password" onChangeText={handlePasswordInput} secureTextEntry></TextInput>
+      <Button mode="contained" onPress={() => {
+        handleLogin();
+      }}>SIGN UP</Button>
+      <View style={styles.buttonContainer}>
+
+        <Text>or</Text>
+        <Button onPress={() => props.navigation.navigate("Login")}>LOGIN</Button>
       </View>
-    )
-  }
-}
+    </View>
+  )
+};
+
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 20,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: "center"
   },
-  inputBox: {
-    width: '85%',
-    margin: 10,
-    padding: 15,
-    fontSize: 16,
-    borderColor: '#d3d3d3',
-    borderBottomWidth: 1,
-    textAlign: 'center'
-  },
-  button: {
-    marginTop: 30,
-    marginBottom: 20,
-    paddingVertical: 5,
-    alignItems: 'center',
-    backgroundColor: '#FFA611',
-    borderColor: '#FFA611',
-    borderWidth: 1,
-    borderRadius: 5,
-    width: 200,
-
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff'
-  },
-  buttonSignup: {
-    fontSize: 12
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
 })
 
-export default Signup
+export default TestScreen

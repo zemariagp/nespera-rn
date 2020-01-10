@@ -4,16 +4,14 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { DefaultTheme,Provider as PaperProvider } from 'react-native-paper';
 import { StateProvider } from "./store/store";
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
 
   const [isLoadingComplete, setLoadingComplete] = useState(false);
-  function authChange(auth) {
-    console.log("auth change", auth)
-  }
+  
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
@@ -27,7 +25,7 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <PaperProvider>
+        <PaperProvider theme={theme}>
 
           <StateProvider>
             <AppNavigator />
@@ -56,6 +54,7 @@ async function loadResourcesAsync() {
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+      'lora': require('./assets/fonts/EBGaramond-Regular.ttf'),
     }),
   ]);
 }
@@ -76,3 +75,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 6,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#d16234',
+    accent: '#f1c40f',
+  },
+};

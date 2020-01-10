@@ -1,88 +1,84 @@
-import React, { useContext, useState } from 'react'
-import { View, TextInput, StyleSheet, TouchableOpacity, Text, Button } from 'react-native'
+import React, { useContext, useState } from 'react';
+import { store } from '../../store/store';
+import { View, StyleSheet, Image, Text } from "react-native";
+import { TextInput, Button } from 'react-native-paper';
 import Firebase from "../../config/Firebase";
-import { store } from "../../store/store";
 
-function Login(props) {
-  const [state, updateState] = useState({
-    email: '',
-    password: ''
-  });
+
+
+const TestScreen = (props) => {
   const globalState = useContext(store);
-  console.log("global", globalState);
+  const { dispatch } = globalState;
+
+
+  const [email, setEmail] = useState("");
+  const handleEmailInput = (email) => {
+    setEmail(email);
+  }
+  const [password, setPassword] = useState("");
+  const handlePasswordInput = (password) => {
+    setPassword(password);
+  }
 
   const handleLogin = () => {
-    const { email, password } = state;
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        console.log(res);
-        props.navigation.navigate
+        dispatch({ type: 'firebase auth success', payload: res });
+        props.navigation.navigate("Main");
       })
       .catch(error => console.log(error))
   }
 
 
+
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.inputBox}
-        value={state.email}
-        onChangeText={email => updateState({ email })}
-        placeholder='Email'
-        autoCapitalize='none'
-      />
-      <TextInput
-        style={styles.inputBox}
-        value={state.password}
-        onChangeText={password => updateState({ password })}
-        placeholder='Password'
-        secureTextEntry={true}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <Button title="Don't have an account yet? Sign up" onPress={() => props.navigation.navigate("Signup")} />
-    </View>
-  )
-}
+      <View style={styles.headerCont}>
+    <Image style={styles.image} source={{ uri: "https://vaiumaaposta.jellycast.com/files/UmaNesperaNoCu.jpg" }} />
 
+      <Text style={ { fontFamily: 'lora',fontSize:30 } } >Uma nêspera no cu.</Text>
+      <Text>Aplicativo para maiores de 18 anos.</Text>
+      </View>
+<View>
+      <TextInput label="email" onChangeText={handleEmailInput}></TextInput>
+      <TextInput label="password" onChangeText={handlePasswordInput} secureTextEntry></TextInput>
+      <Button mode="contained" onPress={() => {
+        handleLogin();
+      }}>LOGIN</Button>
+      <View style={styles.buttonContainer}>
+
+        <Text>ou</Text>
+        <Button onPress={() => props.navigation.navigate("Signup")} >SIGN UP</Button>
+        </View>
+      </View>
+    </View >
+  )
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: "space-evenly",
+    alignContent: "center",
+    backgroundColor: "white",
+    paddingHorizontal: 30
+
+
   },
-  inputBox: {
-    width: '85%',
-    margin: 10,
-    padding: 15,
-    fontSize: 16,
-    borderColor: '#d3d3d3',
-    borderBottomWidth: 1,
-    textAlign: 'center'
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   },
-  button: {
-    marginTop: 30,
-    marginBottom: 20,
-    paddingVertical: 5,
-    alignItems: 'center',
-    backgroundColor: '#F6820D',
-    borderColor: '#F6820D',
-    borderWidth: 1,
-    borderRadius: 5,
-    width: 200
+  image: {
+    
+    width: 100, height: 100
   },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff'
-  },
-  buttonSignup: {
-    fontSize: 12
+  headerCont:{
+    alignItems:"center"
   }
+  
 })
 
-export default Login
+export default TestScreen
