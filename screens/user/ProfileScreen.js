@@ -1,12 +1,21 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { View, Text } from "react-native";
+import { Button } from "react-native-paper";
 
-const ProfileScreen = () => {
+const ProfileScreen = props => {
   return (
     <View>
-      <Text>Profile</Text>
+      <Text>Perfil</Text>
+      <Button
+        onPress={() => {
+          props.navigation.navigate("EditUser");
+        }}
+      >
+        Editar dados
+      </Button>
+      <Text>user stats</Text>
     </View>
-  )
-}
+  );
+};
 
-export default ProfileScreen
+export default ProfileScreen;
