@@ -1,28 +1,27 @@
 import React,{useState,useContext} from "react";
 import { View, Text,StyleSheet } from "react-native";
 import {TextInput,Button} from "react-native-paper";
+import Firebase from "../../config/Firebase";
 import { store } from '../../store/store';
 
 const CreateNesperaScreen = (props) => {
  const [title, setTitle] = useState("");
  const [opA, setOpA] = useState("");
  const [opB, setOpB] = useState("");
-   
 
- const globalState = useContext(store);
-const user = globalState.state.user;
-console.log(user);
+ const user = useContext(store);
  
-const handleCreate = async () =>{
-  const response = await fetch("https://ironhack-wouldyourather.herokuapp.com/api/create", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({ optionA:opA, optionB:opB, category:"dollar", title:title,authorID:user })
-  });
-const resData = await response.json();
-console.log(resData);
- 
+ const handleCreate = () =>{
   
+
+
+  Firebase.database().ref('nesperas/').push({
+    authorId: user.state.user,
+    title: title,
+    opA : opA,
+    opB : opB,
+    imageUrl : "http://picsum.photos/300/200.jpg",
+  });
 props.navigation.pop();
 }
 
