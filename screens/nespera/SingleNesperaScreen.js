@@ -9,8 +9,15 @@ const SingleNesperaScreen = (props) => {
       <Button onPress={() => { props.navigation.navigate("Stats") }}>{nesperaData.optionA}</Button>
       <Text>ou</Text>
       <Button onPress={() => { props.navigation.navigate("Stats") }}>{nesperaData.optionB}</Button>
-    </View>
-  )
-}
 
-export default SingleNesperaScreen
+    </View>
+  );
+};
+
+SingleNesperaScreen.navigationOptions = navData => {
+  return {
+    headerTitle: navData.navigation.getParam("title")
+  };
+};
+
+export default SingleNesperaScreen;

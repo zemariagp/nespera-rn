@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import { Button } from "react-native-paper";
@@ -20,16 +21,15 @@ const NesperasScreen = (props) => {
         })
         .then(function (json) {
           setNespera(json);
+
         });
     };
+    getNesperas();
 
-    getTop();
-
-
+    console.log(nespera);
+    // Execute the created function directly
 
   }, []);
-
-
 
   return (
     <View style={styles.container}> 
@@ -47,10 +47,12 @@ const NesperasScreen = (props) => {
 
 
 
+
     </View>
-  )
-}
+  );
+};
 const styles = StyleSheet.create({
+
   container: { 
    marginTop:40,
     paddingHorizontal: 30 }
@@ -59,3 +61,4 @@ const styles = StyleSheet.create({
 
 
 export default NesperasScreen
+
