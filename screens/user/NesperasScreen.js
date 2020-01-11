@@ -1,37 +1,27 @@
 
-import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
-import { Button, List } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Firebase from "../../config/Firebase";
+import React, { useEffect, useState } from 'react'
+import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { Button } from "react-native-paper";
+import CustomListItem from "../../components/CustomListItem";
+import {NESPERA_API_URL} from 'react-native-dotenv';
 
-const CustomListItem = props => (
-  <TouchableOpacity
-    onPress={() => {
-      props.goToSingle();
-    }}
-  >
-    <List.Item
-      title={props.title}
-      description={`by ${props.author}`}
-      right={() => <Text>{props.answers}</Text>}
-    />
-  </TouchableOpacity>
-);
 
-const NesperasScreen = props => {
-  const [nespera, setNespera] = useState([]);
+
+const NesperasScreen = (props) => {
+
+  const [nespera, setNespera] = useState(null);
 
 
   useEffect(() => {
+    // Create an scoped async function in the hook
+    function getTop() {
+      fetch(NESPERA_API_URL+"/nesperas")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          setNespera(json);
 
-    const getNesperas = () => {
-      Firebase.database()
-        .ref("nesperas")
-        .on("value", function(snapshot) {
-          let data = snapshot.val();
-          let dataNesperas = Object.values(data);
-          setNespera(dataNesperas);
         });
     };
     getNesperas();
@@ -42,31 +32,33 @@ const NesperasScreen = props => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Button mode="contained">AO CALHAS</Button>
+    <View style={styles.container}> 
 
-      <Text>As mais respondidas</Text>
-      <FlatList
-        data={nespera}
-        renderItem={itemData => (
-          <CustomListItem
-            title={itemData.item.title}
-            author={itemData.item.authorId}
-            goToSingle={() => {
-              props.navigation.navigate("Single", {
-                data: itemData.item,
-                title: itemData.item.title
-              });
-            }}
-          />
-        )}
-      />
+      <Text style={ { fontFamily: 'lora',fontSize:30 } } >As mais respondidas</Text>     
+       <FlatList data={nespera} 
+        renderItem={(itemData) =>
+          <CustomListItem nesperaData={itemData.item}
+            goToSingle={
+              (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData })} />} />
+      <Button mode="contained">UMA AO CALHAS</Button>
+
+
+
+
+
+
 
     </View>
   );
 };
 const styles = StyleSheet.create({
-  container: { paddingHorizontal: 30 }
-});
 
-export default NesperasScreen;
+  container: { 
+   marginTop:40,
+    paddingHorizontal: 30 }
+})
+
+
+
+export default NesperasScreen
+

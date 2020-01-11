@@ -5,6 +5,7 @@
       import { Button, List } from "react-native-paper";
       import CustomListItem from "../../components/CustomListItem";
       import { store } from '../../store/store';
+      import {NESPERA_API_URL} from 'react-native-dotenv';
 
       
       
@@ -20,7 +21,7 @@
         useEffect(() => {
           // Create an scoped async function in the hook
           function getUserNesperas() {
-            fetch(`https://ironhack-wouldyourather.herokuapp.com/api/byauthor/${user}`)
+            fetch(NESPERA_API_URL+"/Nesperas?authorId="+user)
               .then(function (response) {
                 return response.json();
               })

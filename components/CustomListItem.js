@@ -11,7 +11,7 @@ const CustomListItem = (props) => {
       <TouchableOpacity onPress={() => { props.goToSingle(nesperaData) }}>
         <List.Item
           title={nesperaData.title}
-          description={`by ${nesperaData.authorID}`}
+          description={`by ${nesperaData.authorId}`}
   
         />
       </TouchableOpacity>
