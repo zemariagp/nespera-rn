@@ -12,8 +12,9 @@ const CreateNesperaScreen = (props) => {
 
 
   const globalState = useContext(store);
-  const user = globalState.state.user;
-  console.log(user);
+  // const user = globalStore.state.user;
+  const user = "qUiqL4TaarbPqU1rXLCg6pcKvLm2";
+  
 
   const handleCreate = async () => {
     const response = await fetch(NESPERA_API_URL+"/Nesperas", {

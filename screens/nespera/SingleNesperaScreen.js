@@ -39,7 +39,9 @@ const SingleNesperaScreen = (props) => {
 
 SingleNesperaScreen.navigationOptions = navData => {
   return {
-    headerTitle: navData.navigation.getParam("title")
+    headerTitle: navData.navigation.getParam("title"),
+    
+  
   };
 };
 

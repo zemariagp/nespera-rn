@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { HeaderBackButton } from 'react-navigation-stack';
 
-const StatsScreen = () => {
+const StatsScreen = (props) => {
   return (
     <View>
       <Text>Stats</Text>
@@ -10,5 +11,14 @@ const StatsScreen = () => {
     </View>
   )
 }
+
+StatsScreen.navigationOptions = navData => {
+  return {
+    headerTitle: "Estatísticas",
+    headerLeft:(<HeaderBackButton onPress={()=>navData.navigation.navigate("Nesperas")}/>)
+  
+  };
+};
+
 
 export default StatsScreen

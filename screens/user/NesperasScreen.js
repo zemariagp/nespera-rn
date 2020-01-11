@@ -10,6 +10,7 @@ import {NESPERA_API_URL} from 'react-native-dotenv';
 const NesperasScreen = (props) => {
 
   const [nespera, setNespera] = useState(null);
+  const [top, setTop] = useState(null);
 
   const handleRandom = () => {
     let randomId = Math.floor(Math.random()*(nespera.length-1))+1;
@@ -28,6 +29,7 @@ const NesperasScreen = (props) => {
         })
         .then(function (json) {
           setNespera(json);
+          setTop(json.slice(0,5));
 
         });
     };
@@ -40,12 +42,11 @@ const NesperasScreen = (props) => {
   return (
     <View style={styles.container}> 
 
-      <Text style={ { fontFamily: 'lora',fontSize:30 } } >As mais respondidas</Text>     
-       <FlatList data={nespera} 
+       <FlatList data={top} 
         renderItem={(itemData) =>
           <CustomListItem nesperaData={itemData.item}
             goToSingle={
-              (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData })} />} />
+              (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData, title:nesperaData.title })} />} />
       
       
       

@@ -24,7 +24,7 @@ const config = Platform.select({
 
 const NesperasStack = createStackNavigator(
   {
-    Nesperas: {screen:NesperasScreen,navigationOptions:{headerTitleStyle:{fontFamily:"lora"}}},
+    Nesperas: {screen:NesperasScreen,navigationOptions:{headerTitle:"As mais respondidas.",headerTitleStyle:{fontFamily:"lora"}}},
     Single: SingleNesperaScreen,
     Stats: StatsScreen
   },
@@ -50,7 +50,7 @@ NesperasStack.path = "";
 
 const MyNesperasStack = createStackNavigator(
   {
-    MyNesperas: MyNesperasScreen,
+    MyNesperas: {screen:MyNesperasScreen,navigationOptions:{headerTitle:"As minhas nêsperas.",headerTitleStyle:{fontFamily:"lora"}}},
     CreateNew:CreateNesperaScreen
   },
   config
@@ -70,7 +70,7 @@ MyNesperasStack.path = "";
 
 const ProfileStack = createStackNavigator(
   {
-    Profile: ProfileScreen,
+    Profile: {screen:ProfileScreen,navigationOptions:{headerTitle:"O meu perfil.",headerTitleStyle:{fontFamily:"lora"}}},
     EditUser: EditUserInfoScreen
   },
   config
@@ -109,5 +109,5 @@ const tabNavigator = createBottomTabNavigator({
 });
 
 tabNavigator.path = "";
-
+tabNavigator.navigationOptions = {}
 export default tabNavigator;

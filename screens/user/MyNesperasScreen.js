@@ -12,30 +12,31 @@
       
       const NesperasScreen = (props) => {
         const globalStore = useContext(store);
-        const user = globalStore.state.user;
+        // const user = globalStore.state.user;
+        const user = "qUiqL4TaarbPqU1rXLCg6pcKvLm2";
         console.log("asd",user);
 
         const [nespera, setNespera] = useState([]);
-      
+        function getUserNesperas() {
+          fetch(NESPERA_API_URL+"/Nesperas?authorId="+user)
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (json) {
+              console.log(json);
+              setNespera(json)
+            });
+        };
       
         useEffect(() => {
           // Create an scoped async function in the hook
-          function getUserNesperas() {
-            fetch(NESPERA_API_URL+"/Nesperas?authorId="+user)
-              .then(function (response) {
-                return response.json();
-              })
-              .then(function (json) {
-                console.log(json);
-                setNespera(json)
-              });
-          };
+          
       
           getUserNesperas();
       
       
       
-        }, []);
+        }, [getUserNesperas]);
         
       
       
@@ -49,7 +50,7 @@
               renderItem={(itemData) =>
                 <CustomListItem nesperaData={itemData.item}
                   goToSingle={
-                    (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData })} />} />
+                    (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData,title:nesperaData.title })} />} />
       
       
       
