@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import { Button } from "react-native-paper";
 import CustomListItem from "../../components/CustomListItem";
-
+import {NESPERA_API_URL} from 'react-native-dotenv';
 
 
 
@@ -14,7 +14,7 @@ const NesperasScreen = (props) => {
   useEffect(() => {
     // Create an scoped async function in the hook
     function getTop() {
-      fetch("https://ironhack-wouldyourather.herokuapp.com/api/top")
+      fetch(NESPERA_API_URL+"/nesperas")
         .then(function (response) {
           return response.json();
         })
@@ -32,15 +32,15 @@ const NesperasScreen = (props) => {
 
 
   return (
-    <View style={styles.container}>
-      <Button mode="contained">AO CALHAS</Button>
+    <View style={styles.container}> 
 
-      <Text>Virais</Text>
-      <FlatList data={nespera} keyExtractor={(el) => el["_id"]}
+      <Text style={ { fontFamily: 'lora',fontSize:30 } } >As mais respondidas</Text>     
+       <FlatList data={nespera} 
         renderItem={(itemData) =>
           <CustomListItem nesperaData={itemData.item}
             goToSingle={
               (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData })} />} />
+      <Button mode="contained">UMA AO CALHAS</Button>
 
 
 
@@ -51,8 +51,11 @@ const NesperasScreen = (props) => {
   )
 }
 const styles = StyleSheet.create({
-  container: { paddingHorizontal: 30 }
+  container: { 
+   marginTop:40,
+    paddingHorizontal: 30 }
 })
+
 
 
 export default NesperasScreen

@@ -22,7 +22,7 @@ const config = Platform.select({
 
 const NesperasStack = createStackNavigator(
   {
-    Nesperas: NesperasScreen,
+    Nesperas: {screen:NesperasScreen,navigationOptions:{headerTitleStyle:{fontFamily:"lora"}}},
     Single: SingleNesperaScreen,
     Stats: StatsScreen
   },
@@ -30,6 +30,7 @@ const NesperasStack = createStackNavigator(
 );
 
 NesperasStack.navigationOptions = {
+  
   tabBarLabel: "Nêsperas",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon

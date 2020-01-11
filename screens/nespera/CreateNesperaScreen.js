@@ -3,6 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { store } from '../../store/store';
 
+import {NESPERA_API_URL} from 'react-native-dotenv';
+
 const CreateNesperaScreen = (props) => {
   const [title, setTitle] = useState("");
   const [opA, setOpA] = useState("");
@@ -14,10 +16,17 @@ const CreateNesperaScreen = (props) => {
   console.log(user);
 
   const handleCreate = async () => {
-    const response = await fetch("https://ironhack-wouldyourather.herokuapp.com/api/create", {
+    const response = await fetch(NESPERA_API_URL+"/Nesperas", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ optionA: opA, optionB: opB, category: "dollar", title: title, authorID: user })
+      body: JSON.stringify({ 
+        optionA: opA, 
+        optionB: opB, 
+        title: title, 
+        authorId: user,
+        amountOfA:0,
+        amountOfB:0
+       })
     });
     const resData = await response.json();
     console.log(resData);
