@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
-import { Button, List } from "react-native-paper";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Button } from "react-native-paper";
 import CustomListItem from "../../components/CustomListItem";
 
 
@@ -9,22 +8,22 @@ import CustomListItem from "../../components/CustomListItem";
 
 const NesperasScreen = (props) => {
 
-  const [nespera, setNespera] = useState([]);
+  const [nespera, setNespera] = useState(null);
 
 
   useEffect(() => {
     // Create an scoped async function in the hook
-    function getUser() {
-      fetch("https://nespera.herokuapp.com/api/top")
+    function getTop() {
+      fetch("https://ironhack-wouldyourather.herokuapp.com/api/top")
         .then(function (response) {
           return response.json();
         })
         .then(function (json) {
-          setNespera(json)
+          setNespera(json);
         });
     };
 
-    getUser();
+    getTop();
 
 
 
@@ -36,7 +35,7 @@ const NesperasScreen = (props) => {
     <View style={styles.container}>
       <Button mode="contained">AO CALHAS</Button>
 
-      <Text>As mais respondidas</Text>
+      <Text>Virais</Text>
       <FlatList data={nespera} keyExtractor={(el) => el["_id"]}
         renderItem={(itemData) =>
           <CustomListItem nesperaData={itemData.item}
