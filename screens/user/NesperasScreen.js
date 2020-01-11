@@ -11,12 +11,19 @@ const NesperasScreen = (props) => {
 
   const [nespera, setNespera] = useState(null);
 
+  const handleRandom = () => {
+    let randomId = Math.floor(Math.random()*(nespera.length-1))+1;
+    console.log(randomId+1);
+    props.navigation.navigate("Single", { nesperaToShow: nespera[randomId] })
+  }
+
 
   useEffect(() => {
     // Create an scoped async function in the hook
-    function getTop() {
-      fetch(NESPERA_API_URL+"/nesperas")
+    function getNesperas() {
+      fetch(NESPERA_API_URL+"/Nesperas")
         .then(function (response) {
+         
           return response.json();
         })
         .then(function (json) {
@@ -26,7 +33,6 @@ const NesperasScreen = (props) => {
     };
     getNesperas();
 
-    console.log(nespera);
     // Execute the created function directly
 
   }, []);
@@ -40,7 +46,10 @@ const NesperasScreen = (props) => {
           <CustomListItem nesperaData={itemData.item}
             goToSingle={
               (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData })} />} />
-      <Button mode="contained">UMA AO CALHAS</Button>
+      
+      
+      
+      <Button onPress={()=>handleRandom()} mode="contained">UMA AO CALHAS</Button>
 
 
 

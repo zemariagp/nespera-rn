@@ -13,7 +13,7 @@
       const NesperasScreen = (props) => {
         const globalStore = useContext(store);
         const user = globalStore.state.user;
-        console.log(user);
+        console.log("asd",user);
 
         const [nespera, setNespera] = useState([]);
       

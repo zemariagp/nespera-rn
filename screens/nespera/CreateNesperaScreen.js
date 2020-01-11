@@ -24,9 +24,10 @@ const CreateNesperaScreen = (props) => {
         optionB: opB, 
         title: title, 
         authorId: user,
-        amountOfA:0,
-        amountOfB:0
-       })
+        votedForA:0,
+        votedForB:0,
+        pictureUrl:"asd"
+       }) 
     });
     const resData = await response.json();
     console.log(resData);

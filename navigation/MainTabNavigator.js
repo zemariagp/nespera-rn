@@ -15,6 +15,8 @@ import CreateNesperaScreen from "../screens/nespera/CreateNesperaScreen";
 import ProfileScreen from "../screens/user/ProfileScreen";
 import EditUserInfoScreen from "../screens/user/EditUserInfoScreen";
 
+import EpisodesScreen from "../screens/EpisodesScreen";
+
 const config = Platform.select({
   web: { headerMode: "screen" },
   default: {}
@@ -86,9 +88,23 @@ ProfileStack.navigationOptions = {
 
 ProfileStack.path = "";
 
+EpisodesScreen.navigationOptions = {
+  tabBarLabel: "Episódios",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "logo-youtube" : "logo-youtube"}
+    />
+  )
+};
+
+EpisodesScreen.path = "";
+
+
 const tabNavigator = createBottomTabNavigator({
   NesperasStack,
   MyNesperasStack,
+  EpisodesScreen,
   ProfileStack
 });
 
