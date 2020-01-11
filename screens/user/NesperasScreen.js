@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { Button, List } from "react-native-paper";
@@ -21,7 +22,9 @@ const CustomListItem = props => (
 const NesperasScreen = props => {
   const [nespera, setNespera] = useState([]);
 
+
   useEffect(() => {
+
     const getNesperas = () => {
       Firebase.database()
         .ref("nesperas")
@@ -35,6 +38,7 @@ const NesperasScreen = props => {
 
     console.log(nespera);
     // Execute the created function directly
+
   }, []);
 
   return (
@@ -57,6 +61,7 @@ const NesperasScreen = props => {
           />
         )}
       />
+
     </View>
   );
 };
