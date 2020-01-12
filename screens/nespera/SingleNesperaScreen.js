@@ -25,8 +25,8 @@ const SingleNesperaScreen = (props) => {
       console.log(resData);
       props.navigation.push("Stats",
       {stats:[
-        {x:nesperaData.optionA,y:23},
-        {x:nesperaData.optionB,y:2}
+        {x:nesperaData.optionA,y:option==="a"?nesperaData.votedForA+1:nesperaData.votedForA},
+        {x:nesperaData.optionB,y:option==="b"?nesperaData.votedForB+1:nesperaData.votedForB}
 
       ]});
       } 
