@@ -24,9 +24,9 @@ const config = Platform.select({
 
 const NesperasStack = createStackNavigator(
   {
+    Stats: StatsScreen,
     Nesperas: {screen:NesperasScreen,navigationOptions:{headerTitle:"Os mais respondidos.",headerTitleStyle:{fontFamily:"lora"}}},
     Single: SingleNesperaScreen,
-    Stats: StatsScreen
   },
   config
 );
