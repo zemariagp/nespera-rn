@@ -32,12 +32,14 @@
     "react-native-reanimated": "~1.4.0",
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-web": "~0.11.7",
+    "react-native-webview": "7.4.3",
     "react-native-yt-player": "^1.0.6",
     "react-navigation": "~4.0.10",
     "react-navigation-stack": "~1.10.3",
     "react-navigation-tabs": "~2.6.2",
+    "victory-native": "^34.0.0",
     "yarn": "^1.21.1",
-    "react-native-webview": "7.4.3"
+    "react-native-svg": "9.13.3"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

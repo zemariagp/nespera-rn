@@ -23,7 +23,12 @@ const SingleNesperaScreen = (props) => {
        })})
       const resData = await response.json();
       console.log(resData);
-      props.navigation.push("Stats");
+      props.navigation.push("Stats",
+      {stats:[
+        {x:nesperaData.optionA,y:23},
+        {x:nesperaData.optionB,y:2}
+
+      ]});
       } 
     
 
