@@ -12,8 +12,7 @@ const CreateNesperaScreen = (props) => {
 
 
   const globalState = useContext(store);
-  // const user = globalStore.state.user;
-  const user = "qUiqL4TaarbPqU1rXLCg6pcKvLm2";
+  const user = globalState.state["_55"];
   
 
   const handleCreate = async () => {
@@ -24,10 +23,11 @@ const CreateNesperaScreen = (props) => {
         optionA: opA, 
         optionB: opB, 
         title: title, 
-        authorId: user,
+        authorId: user["id"],
         votedForA:0,
         votedForB:0,
-        pictureUrl:"asd"
+        pictureUrl:"http://picsum.photos/350/200",
+        authorName:user["name"]
        }) 
     });
     const resData = await response.json();

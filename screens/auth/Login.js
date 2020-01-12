@@ -24,7 +24,7 @@ const TestScreen = (props) => {
     Firebase.auth()
       .signInWithEmailAndPassword(email.trim(), password.trim())
       .then((res) => {
-        dispatch({ type: 'firebase auth success', payload: res });
+        dispatch({ type: 'firebase login success', payload: email });
         props.navigation.navigate("Main");
       })
       .catch(error => console.log(error))
@@ -41,7 +41,7 @@ const TestScreen = (props) => {
       <Text>Aplicativo para maiores de 18 anos.</Text>
       </View>
 <View>
-      <TextInput label="email" onChangeText={handleEmailInput}></TextInput>
+      <TextInput label="email" keyboardType={"email-address"} autoCapitalize={"none"} onChangeText={handleEmailInput}></TextInput>
       <TextInput label="password" onChangeText={handlePasswordInput} secureTextEntry></TextInput>
       <Button mode="contained" onPress={() => {
         handleLogin();

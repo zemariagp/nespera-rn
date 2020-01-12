@@ -29,7 +29,9 @@ const NesperasScreen = (props) => {
         })
         .then(function (json) {
           setNespera(json);
-          setTop(json.slice(0,5));
+          const top5Nesperas = json.slice(0,5);
+          
+          setTop(top5Nesperas);
 
         });
     };
@@ -42,18 +44,15 @@ const NesperasScreen = (props) => {
   return (
     <View style={styles.container}> 
 
-       <FlatList data={top} 
-        renderItem={(itemData) =>
+       <FlatList data={top} keyExtractor = { (item) => item["id"].toString() } renderItem={(itemData) =>
           <CustomListItem nesperaData={itemData.item}
             goToSingle={
               (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData, title:nesperaData.title })} />} />
       
-      
-      
-      <Button onPress={()=>handleRandom()} mode="contained">UMA AO CALHAS</Button>
+      <Button onPress={()=>handleRandom()} mode="contained" loading={true}>UMA AO CALHAS</Button>
 
 
-
+ 
 
 
 
@@ -64,7 +63,8 @@ const NesperasScreen = (props) => {
 const styles = StyleSheet.create({
 
   container: { 
-   marginTop:40,
+    flex:1,
+ justifyContent:"center",
     paddingHorizontal: 30 }
 })
 

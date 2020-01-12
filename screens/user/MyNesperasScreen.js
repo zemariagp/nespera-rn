@@ -11,14 +11,14 @@
       
       
       const NesperasScreen = (props) => {
-        const globalStore = useContext(store);
-        // const user = globalStore.state.user;
-        const user = "qUiqL4TaarbPqU1rXLCg6pcKvLm2";
-        console.log("asd",user);
+        const globalState = useContext(store);
+        const user = globalState.state["_55"];
+        
+        console.log("assssd",user);
 
         const [nespera, setNespera] = useState([]);
         function getUserNesperas() {
-          fetch(NESPERA_API_URL+"/Nesperas?authorId="+user)
+          fetch(NESPERA_API_URL+"/Nesperas?authorId="+(parseInt(user["id"])+1).toString())
             .then(function (response) {
               return response.json();
             })
@@ -36,7 +36,7 @@
       
       
       
-        }, [getUserNesperas]);
+        }, []);
         
       
       
@@ -46,7 +46,7 @@
 
       
            
-            <FlatList data={nespera} keyExtractor={(el) => el["_id"]}
+            <FlatList data={nespera} keyExtractor={(el) => el["id"].toString()}
               renderItem={(itemData) =>
                 <CustomListItem nesperaData={itemData.item}
                   goToSingle={
@@ -61,7 +61,7 @@
         )
       }
       const styles = StyleSheet.create({
-        container: { paddingHorizontal: 30 }
+        container: { paddingHorizontal: 30,flex:1,justifyContent:"center" }
       })
       
       

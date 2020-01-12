@@ -39,7 +39,7 @@ NesperasStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-globe${focused ? "" : "-outline"}`
+          ? `ios-globe${focused ? "" : ""}`
           : "md-globe"
       }
     />

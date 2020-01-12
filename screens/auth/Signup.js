@@ -26,11 +26,12 @@ const TestScreen = (props) => {
     setName(name);
   }
 
-  const handleLogin = () => {
+  const handleSignup = () => {
+    console.log("BUSTED");
     Firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
-        dispatch({ type: 'firebase auth success', payload: res })
+        dispatch({ type: 'firebase signup success', payload: {name:name,email:email} })
         props.navigation.navigate("Main");
       })
       .catch(error => console.log(error))
@@ -42,10 +43,10 @@ const TestScreen = (props) => {
     <View style={styles.container}>
 
       <TextInput label="name" onChangeText={handleNameInput}></TextInput>
-      <TextInput label="email" onChangeText={handleEmailInput}></TextInput>
+      <TextInput label="email" keyboardType={"email-address"} autoCapitalize={"none"} onChangeText={handleEmailInput}></TextInput>
       <TextInput label="password" onChangeText={handlePasswordInput} secureTextEntry></TextInput>
       <Button mode="contained" onPress={() => {
-        handleLogin();
+        handleSignup();
       }}>SIGN UP</Button>
       <View style={styles.buttonContainer}>
 
