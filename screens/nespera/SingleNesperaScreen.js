@@ -65,13 +65,13 @@ SingleNesperaScreen.navigationOptions = navData => {
 };
 
 const styles = StyleSheet.create({
-  container:{paddingHorizontal:30,flex:1,justifyContent:"space-between"},
+  container:{padding:30,flex:1,justifyContent:"space-between"},
   preferias: {fontFamily:"lora",fontSize:40,textAlign:"center"},
   author:{fontFamily:"lora",fontSize:26,textAlign:"right"},
   button:{
     color:"#d16234",
     textAlign:"center",
-    fontSize:15
+    fontSize:20
     
    
   }

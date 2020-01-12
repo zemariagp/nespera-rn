@@ -38,30 +38,35 @@
       
         }, []);
         
+      if (nespera.length === 0)
       
-      
-        return (
+       { return (
           <View style={styles.container}>
-                  <Button onPress={()=>props.navigation.navigate("CreateNew")}>Criar Nova</Button>
+            <Text>Ainda não criaste nenhum dilema.</Text>
+                  <Button mode="contained" onPress={()=>props.navigation.navigate("CreateNew")}>Criar Novo</Button>
 
       
-           
-            <FlatList data={nespera} keyExtractor={(el) => el["id"].toString()}
-              renderItem={(itemData) =>
-                <CustomListItem nesperaData={itemData.item}
-                  goToSingle={
-                    (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData,title:nesperaData.title })} />} />
-      
-      
-      
-      
+          
       
       
           </View>
+        )}
+        else return (
+<View style={styles.container}>
+          <FlatList data={nespera} keyExtractor={(el) => el["id"].toString()}
+          renderItem={(itemData) =>
+            <CustomListItem nesperaData={itemData.item}
+              goToSingle={
+                (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData,title:nesperaData.title })} />} />
+  
+                <Button mode="contained" onPress={()=>props.navigation.navigate("CreateNew")}>Criar Novo</Button>
+
+                </View>
+  
         )
       }
       const styles = StyleSheet.create({
-        container: { paddingHorizontal: 30,flex:1,justifyContent:"center" }
+        container: { flex:1, padding: 30,justifyContent:"space-evenly",alignItems:"center" }
       })
       
       

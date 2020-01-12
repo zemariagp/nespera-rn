@@ -8,7 +8,6 @@ import {NESPERA_API_URL} from 'react-native-dotenv';
 
 
 const NesperasScreen = (props) => {
-
   const [nespera, setNespera] = useState(null);
   const [top, setTop] = useState(null);
 
@@ -29,7 +28,7 @@ const NesperasScreen = (props) => {
         })
         .then(function (json) {
           setNespera(json);
-          const top5Nesperas = json.slice(0,5);
+          const top5Nesperas = json;
           
           setTop(top5Nesperas);
 
@@ -48,9 +47,9 @@ const NesperasScreen = (props) => {
           <CustomListItem nesperaData={itemData.item}
             goToSingle={
               (nesperaData) => props.navigation.navigate("Single", { nesperaToShow: nesperaData, title:nesperaData.title })} />} />
+      <View style={styles.buttonContainer}><Button onPress={()=>handleRandom()} mode="contained" >UM AO CALHAS</Button>
+</View>
       
-      <Button onPress={()=>handleRandom()} mode="contained" loading={true}>UMA AO CALHAS</Button>
-
 
  
 
@@ -64,8 +63,9 @@ const styles = StyleSheet.create({
 
   container: { 
     flex:1,
- justifyContent:"center",
-    paddingHorizontal: 30 }
+ justifyContent:"space-between",
+    padding: 30 },
+    buttonContainer:{flexDirection:"row",justifyContent:"center",}
 })
 
 

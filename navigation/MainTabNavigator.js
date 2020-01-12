@@ -24,7 +24,7 @@ const config = Platform.select({
 
 const NesperasStack = createStackNavigator(
   {
-    Nesperas: {screen:NesperasScreen,navigationOptions:{headerTitle:"As mais respondidas.",headerTitleStyle:{fontFamily:"lora"}}},
+    Nesperas: {screen:NesperasScreen,navigationOptions:{headerTitle:"Os mais respondidos.",headerTitleStyle:{fontFamily:"lora"}}},
     Single: SingleNesperaScreen,
     Stats: StatsScreen
   },
@@ -33,7 +33,7 @@ const NesperasStack = createStackNavigator(
 
 NesperasStack.navigationOptions = {
   
-  tabBarLabel: "Nêsperas",
+  tabBarLabel: "Dilemas",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -50,14 +50,14 @@ NesperasStack.path = "";
 
 const MyNesperasStack = createStackNavigator(
   {
-    MyNesperas: {screen:MyNesperasScreen,navigationOptions:{headerTitle:"As minhas nêsperas.",headerTitleStyle:{fontFamily:"lora"}}},
+    MyNesperas: {screen:MyNesperasScreen,navigationOptions:{headerTitle:"Os meus dilemas.",headerTitleStyle:{fontFamily:"lora"}}},
     CreateNew:CreateNesperaScreen
   },
   config
 );
 
 MyNesperasStack.navigationOptions = {
-  tabBarLabel: "As Minhas",
+  tabBarLabel: "Os Meus",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

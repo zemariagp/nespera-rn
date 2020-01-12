@@ -7,6 +7,9 @@ import Firebase from "../../config/Firebase";
 
 
 const TestScreen = (props) => {
+  const [isLoading,setIsLoading] = useState(false);
+
+
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
@@ -21,10 +24,13 @@ const TestScreen = (props) => {
   }
 
   const handleLogin = () => {
+    setIsLoading(true);
+
     Firebase.auth()
       .signInWithEmailAndPassword(email.trim(), password.trim())
       .then((res) => {
         dispatch({ type: 'firebase login success', payload: email });
+        setIsLoading(false);
         props.navigation.navigate("Main");
       })
       .catch(error => console.log(error))
@@ -43,7 +49,7 @@ const TestScreen = (props) => {
 <View>
       <TextInput label="email" keyboardType={"email-address"} autoCapitalize={"none"} onChangeText={handleEmailInput}></TextInput>
       <TextInput label="password" onChangeText={handlePasswordInput} secureTextEntry></TextInput>
-      <Button mode="contained" onPress={() => {
+      <Button mode="contained" loading={isLoading} onPress={() => {
         handleLogin();
       }}>LOGIN</Button>
       <View style={styles.buttonContainer}>
