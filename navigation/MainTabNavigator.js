@@ -24,15 +24,15 @@ const config = Platform.select({
 
 const NesperasStack = createStackNavigator(
   {
-    Stats: StatsScreen,
-    Nesperas: {screen:NesperasScreen,navigationOptions:{headerTitle:"Os mais respondidos.",headerTitleStyle:{fontFamily:"lora"}}},
+    Nesperas: { screen: NesperasScreen, navigationOptions: { headerTitle: "Os mais respondidos.", headerTitleStyle: { fontFamily: "lora" } } },
     Single: SingleNesperaScreen,
+    Stats: StatsScreen,
   },
   config
 );
 
 NesperasStack.navigationOptions = {
-  
+
   tabBarLabel: "Dilemas",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -50,8 +50,8 @@ NesperasStack.path = "";
 
 const MyNesperasStack = createStackNavigator(
   {
-    MyNesperas: {screen:MyNesperasScreen,navigationOptions:{headerTitle:"Os meus dilemas.",headerTitleStyle:{fontFamily:"lora"}}},
-    CreateNew:CreateNesperaScreen
+    MyNesperas: { screen: MyNesperasScreen, navigationOptions: { headerTitle: "Os meus dilemas.", headerTitleStyle: { fontFamily: "lora" } } },
+    CreateNew: CreateNesperaScreen
   },
   config
 );
@@ -70,7 +70,7 @@ MyNesperasStack.path = "";
 
 const ProfileStack = createStackNavigator(
   {
-    Profile: {screen:ProfileScreen,navigationOptions:{headerTitle:"O meu perfil.",headerTitleStyle:{fontFamily:"lora"}}},
+    Profile: { screen: ProfileScreen, navigationOptions: { headerTitle: "O meu perfil.", headerTitleStyle: { fontFamily: "lora" } } },
     EditUser: EditUserInfoScreen
   },
   config
