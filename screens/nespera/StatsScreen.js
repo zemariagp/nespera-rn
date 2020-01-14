@@ -25,21 +25,15 @@ const StatsScreen = props => {
     }
   };
 
-  const stats = [
-    { x: nesperaData.optionA, y: nesperaData.votedForA },
-    { x: nesperaData.optionB, y: nesperaData.votedForB }
-  ];
-
   return (
     <View style={styles.container}>
       <VictoryPie
         colorScale={'qualitative'}
-        /* data={[
-    { x: "Cats", y: 35 },
-    { x: "Dogs", y: 40 },
-    { x: "Birds", y: 55 }
-  ]} */
-        data={stats}
+        data={[
+          { x: 'Cats', y: 35 },
+          { x: 'Dogs', y: 40 },
+          { x: 'Birds', y: 55 }
+        ]}
       />
       <Button onPress={onShare} title="Share">
         Partilhar

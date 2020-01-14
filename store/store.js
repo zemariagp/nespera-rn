@@ -11,7 +11,8 @@ const createUserInDatabase = async newuser => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       name: newuser.name,
-      email: newuser.email
+      email: newuser.email,
+      id: newuser._id
     })
   });
 

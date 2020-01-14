@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import CustomListItem from '../../components/CustomListItem';
 import { NESPERA_API_URL } from 'react-native-dotenv';
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc';
 
 const NesperasScreen = props => {
   const [nespera, setNespera] = useState(null);
@@ -26,9 +27,7 @@ const NesperasScreen = props => {
         });
     }
     getNesperas();
-
-    // Execute the created function directly
-  }, []);
+  }, [props.isFocused]);
 
   return (
     <View style={styles.container}>
@@ -64,4 +63,4 @@ const styles = StyleSheet.create({
   buttonContainer: { flexDirection: 'row', justifyContent: 'center' }
 });
 
-export default NesperasScreen;
+export default withNavigationFocus(NesperasScreen);

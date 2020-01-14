@@ -11,8 +11,7 @@ const CreateNesperaScreen = props => {
   const [opB, setOpB] = useState('');
 
   const globalState = useContext(store);
-  const user = globalState.state['_55'].data;
-
+  const user = globalState.state['_55'];
   const handleCreate = async () => {
     const response = await fetch(NESPERA_API_URL + '/Nesperas/', {
       method: 'POST',
@@ -21,11 +20,11 @@ const CreateNesperaScreen = props => {
         optionA: opA,
         optionB: opB,
         title: title,
-        authorId: user['_id'],
+        authorId: 'asd',
         votedForA: 0,
         votedForB: 0,
         pictureUrl: 'http://picsum.photos/350/200',
-        authorName: 'asd'
+        authorName: 'asdd'
       })
     });
     const resData = await response.json();

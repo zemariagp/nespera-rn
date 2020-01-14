@@ -4,14 +4,14 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { DefaultTheme,Provider as PaperProvider } from 'react-native-paper';
-import { StateProvider } from "./store/store";
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { StateProvider } from './store/store';
 import AppNavigator from './navigation/AppNavigator';
+import { updateFocus, getCurrentRouteKey } from 'react-navigation-is-focused-hoc';
 
 export default function App(props) {
-
   const [isLoadingComplete, setLoadingComplete] = useState(false);
-  
+
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
@@ -21,32 +21,28 @@ export default function App(props) {
       />
     );
   } else {
-
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <PaperProvider theme={theme}>
-
           <StateProvider>
-            <AppNavigator />
+            <AppNavigator
+              onNavigationStateChange={(prevState, currentState) => {
+                updateFocus(currentState);
+              }}
+            />
           </StateProvider>
-
-
-
-
         </PaperProvider>
-
       </View>
     );
   }
-
 }
 
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
+      require('./assets/images/robot-prod.png')
     ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
@@ -54,8 +50,8 @@ async function loadResourcesAsync() {
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      'lora': require('./assets/fonts/EBGaramond-Regular.ttf'),
-    }),
+      lora: require('./assets/fonts/EBGaramond-Regular.ttf')
+    })
   ]);
 }
 
@@ -72,8 +68,8 @@ function handleFinishLoading(setLoadingComplete) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: '#fff'
+  }
 });
 
 const theme = {
@@ -82,6 +78,6 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#d16234',
-    accent: '#f1c40f',
-  },
+    accent: '#f1c40f'
+  }
 };

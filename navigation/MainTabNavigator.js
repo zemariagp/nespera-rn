@@ -14,7 +14,6 @@ import CreateNesperaScreen from '../screens/nespera/CreateNesperaScreen';
 
 import ProfileScreen from '../screens/user/ProfileScreen';
 import EditUserInfoScreen from '../screens/user/EditUserInfoScreen';
-
 import EpisodesScreen from '../screens/EpisodesScreen';
 
 const config = Platform.select({

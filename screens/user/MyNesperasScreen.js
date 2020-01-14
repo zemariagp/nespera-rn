@@ -1,66 +1,64 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { Button, List } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import CustomListItem from '../../components/CustomListItem';
-import { store } from '../../store/store';
 import { NESPERA_API_URL } from 'react-native-dotenv';
+import { withNavigationFocus } from 'react-navigation-is-focused-hoc';
 
 const NesperasScreen = props => {
-  const globalState = useContext(store);
-  const user = globalState.state['_55'];
+  const [top, setTop] = useState(null);
 
-  const [nespera, setNespera] = useState([]);
-  async function getUserNesperas() {
-    const response = await fetch(NESPERA_API_URL + '/Nesperas/author/' + user);
-    const resData = await response.json();
-    // setNespera(resData);
-  }
+  const handleCreate = () => {
+    props.navigation.navigate('Create');
+  };
 
   useEffect(() => {
-    getUserNesperas();
-  }, []);
+    // Create an scoped async function in the hook
+    function getNesperas() {
+      fetch(NESPERA_API_URL + '/Nesperas/author/asd')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(json) {
+          const allNesperas = json;
+          setTop(allNesperas['resData']);
+        });
+    }
+    getNesperas();
+  }, [props.isFocused]);
 
-  if (nespera.length === 0) {
-    return (
-      <View style={styles.container}>
-        <Text>Ainda não criaste nenhum dilema.</Text>
-        <Button mode="contained" onPress={() => props.navigation.navigate('CreateNew')}>
-          Criar Novo
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={top}
+        keyExtractor={item => item['_id'].toString()}
+        renderItem={itemData => (
+          <CustomListItem
+            nesperaData={itemData.item}
+            goToSingle={nesperaData =>
+              props.navigation.navigate('Stats', {
+                nesperaToShow: nesperaData,
+                title: nesperaData.title
+              })
+            }
+          />
+        )}
+      />
+      <View style={styles.buttonContainer}>
+        <Button onPress={() => handleRandom()} mode="contained">
+          CRIAR DILEMA
         </Button>
       </View>
-    );
-  } else
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={nespera}
-          keyExtractor={el => el['_id'].toString()}
-          renderItem={itemData => (
-            <CustomListItem
-              nesperaData={itemData.item}
-              goToSingle={nesperaData =>
-                props.navigation.navigate('Single', {
-                  nesperaToShow: nesperaData,
-                  title: nesperaData.title
-                })
-              }
-            />
-          )}
-        />
-
-        <Button mode="contained" onPress={() => props.navigation.navigate('CreateNew')}>
-          Criar Novo
-        </Button>
-      </View>
-    );
+    </View>
+  );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 30,
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
-  }
+    justifyContent: 'space-between',
+    padding: 30
+  },
+  buttonContainer: { flexDirection: 'row', justifyContent: 'center' }
 });
 
-export default NesperasScreen;
+export default withNavigationFocus(NesperasScreen);

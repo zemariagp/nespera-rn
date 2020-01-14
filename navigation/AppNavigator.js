@@ -7,7 +7,7 @@ export default createAppContainer(
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
 
-    Auth: AuthNavigator,
-    Main: MainTabNavigator
+    Main: MainTabNavigator,
+    Auth: AuthNavigator
   })
 );
