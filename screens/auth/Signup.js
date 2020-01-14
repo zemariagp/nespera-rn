@@ -1,7 +1,7 @@
 
 import React, { useContext, useState } from 'react';
 import { store } from '../../store/store';
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
 import Firebase from "../../config/Firebase";
 
@@ -31,7 +31,7 @@ const TestScreen = (props) => {
     Firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
-        dispatch({ type: 'firebase signup success', payload: {name:name,email:email} })
+        dispatch({ type: 'firebase signup success', payload: { name: name, email: email } })
         props.navigation.navigate("Main");
       })
       .catch(error => console.log(error))
@@ -40,7 +40,7 @@ const TestScreen = (props) => {
 
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
       <TextInput label="name" onChangeText={handleNameInput}></TextInput>
       <TextInput label="email" keyboardType={"email-address"} autoCapitalize={"none"} onChangeText={handleEmailInput}></TextInput>
@@ -53,7 +53,7 @@ const TestScreen = (props) => {
         <Text>or</Text>
         <Button onPress={() => props.navigation.navigate("Login")}>LOGIN</Button>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   )
 };
 

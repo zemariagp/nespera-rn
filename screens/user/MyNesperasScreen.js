@@ -20,11 +20,9 @@ const NesperasScreen = (props) => {
   const [nespera, setNespera] = useState([]);
   function getUserNesperas() {
     fetch(NESPERA_API_URL + "/Nesperas?authorId=" + (parseInt(user["id"])).toString()).then(function (response) {
-      console.log(response.body);
       return response.json();
     })
       .then(function (json) {
-        console.log(json);
         setNespera(json)
       });
   };
