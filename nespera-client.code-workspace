@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "/Users/zemariagp/ironhack/labs/MyApp"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/.expo*": true,
+			"**/node_modules": true,
+			"**/babel*": true,
+			"**/package-lock.json": true,
+			"**/__tests__": true,
+			"**/.DS_Store": true,
+		}
+	}
+}

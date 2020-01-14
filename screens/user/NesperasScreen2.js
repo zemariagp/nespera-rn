@@ -3,37 +3,24 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import CustomListItem from '../../components/CustomListItem';
 import { NESPERA_API_URL } from 'react-native-dotenv';
+import useDataApi from 'use-data-api';
 
 const NesperasScreen = props => {
   const [nespera, setNespera] = useState(null);
   const [top, setTop] = useState(null);
 
   const handleRandom = () => {
-    props.navigation.navigate('Single', { nesperaToShow: top[0] });
+    // props.navigation.navigate('Single', { nesperaToShow: top[0] });
   };
 
-  useEffect(() => {
-    // Create an scoped async function in the hook
-    function getNesperas() {
-      fetch(NESPERA_API_URL + '/Nesperas')
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(json) {
-          setNespera(json);
-          const allNesperas = json;
-          setTop(allNesperas['resData']);
-        });
-    }
-    getNesperas();
+  const [{ data, isLoading, isError }, doFetch] = useDataApi(NESPERA_API_URL + '/Nesperas', []);
 
-    // Execute the created function directly
-  }, []);
+  doFetch(NESPERA_API_URL + '/Nesperas');
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={top}
+        data={data}
         keyExtractor={item => item['_id'].toString()}
         renderItem={itemData => (
           <CustomListItem
