@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import CustomListItem from '../../components/CustomListItem';
 import { NESPERA_API_URL } from 'react-native-dotenv';
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc';
+import { store } from '../../store/store';
 
-const NesperasScreen = props => {
+const MyNesperasScreen = props => {
   const [top, setTop] = useState(null);
+  const globalState = useContext(store);
+  const user = globalState['state']['_55'];
 
+  console.log('user in screen', user);
   const handleCreate = () => {
-    props.navigation.navigate('Create');
+    props.navigation.navigate('CreateNew');
   };
 
   useEffect(() => {
-    // Create an scoped async function in the hook
     function getNesperas() {
-      fetch(NESPERA_API_URL + '/Nesperas/author/asd')
+      fetch(NESPERA_API_URL + '/Nesperas/author/' + user['_id'])
         .then(function(response) {
           return response.json();
         })
@@ -45,7 +48,7 @@ const NesperasScreen = props => {
         )}
       />
       <View style={styles.buttonContainer}>
-        <Button onPress={() => handleRandom()} mode="contained">
+        <Button onPress={() => handleCreate()} mode="contained">
           CRIAR DILEMA
         </Button>
       </View>
@@ -61,4 +64,4 @@ const styles = StyleSheet.create({
   buttonContainer: { flexDirection: 'row', justifyContent: 'center' }
 });
 
-export default withNavigationFocus(NesperasScreen);
+export default withNavigationFocus(MyNesperasScreen);

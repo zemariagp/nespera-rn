@@ -3,8 +3,22 @@ import { View, Share, StyleSheet } from 'react-native';
 import { HeaderBackButton } from 'react-navigation-stack';
 import { VictoryPie } from 'victory-native';
 import { Button } from 'react-native-paper';
-
+import { NESPERA_API_URL } from 'react-native-dotenv';
 const StatsScreen = props => {
+  useEffect(() => {
+    function getNesperas() {
+      fetch(NESPERA_API_URL + '/Nesperas/')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(json) {
+          const allNesperas = json;
+          setTop(allNesperas['resData']);
+        });
+    }
+    getNesperas();
+  }, []);
+
   const onShare = async () => {
     try {
       const result = await Share.share({

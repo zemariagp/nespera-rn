@@ -11,13 +11,11 @@ const createUserInDatabase = async newuser => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       name: newuser.name,
-      email: newuser.email,
-      id: newuser._id
+      email: newuser.email
     })
   });
 
   const resData = await response.json();
-
   return resData;
 };
 
@@ -40,6 +38,7 @@ const StateProvider = ({ children }) => {
         const userFromDatabase2 = await getUserInDatabase(payload);
         const newState2 = await userFromDatabase2;
         return newState2;
+
       default:
         throw new Error();
     }
