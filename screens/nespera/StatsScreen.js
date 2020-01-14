@@ -5,7 +5,7 @@ import { VictoryPie } from 'victory-native';
 import { Button } from 'react-native-paper';
 import { NESPERA_API_URL } from 'react-native-dotenv';
 const StatsScreen = props => {
-  useEffect(() => {
+  /*  useEffect(() => {
     function getNesperas() {
       fetch(NESPERA_API_URL + '/Nesperas/')
         .then(function(response) {
@@ -17,7 +17,7 @@ const StatsScreen = props => {
         });
     }
     getNesperas();
-  }, []);
+  }, []); */
 
   const onShare = async () => {
     try {
