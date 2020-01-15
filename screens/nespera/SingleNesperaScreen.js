@@ -18,7 +18,7 @@ const SingleNesperaScreen = props => {
       }
     );
     const resData = await response.json();
-    props.navigation.push('Stats');
+    props.navigation.push('Stats', { nesperaToShow: nesperaData });
   };
 
   return (

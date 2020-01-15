@@ -1,28 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Share, StyleSheet } from 'react-native';
 import { HeaderBackButton } from 'react-navigation-stack';
 import { VictoryPie } from 'victory-native';
 import { Button } from 'react-native-paper';
 import { NESPERA_API_URL } from 'react-native-dotenv';
+
 const StatsScreen = props => {
-  /*  useEffect(() => {
+  const nesperaData = props.navigation.getParam('nesperaToShow');
+  const [nespera, setNespera] = useState({});
+
+  useEffect(() => {
     function getNesperas() {
-      fetch(NESPERA_API_URL + '/Nesperas/')
+      fetch(NESPERA_API_URL + '/Nesperas/' + nesperaData['_id'])
         .then(function(response) {
           return response.json();
         })
         .then(function(json) {
           const allNesperas = json;
-          setTop(allNesperas['resData']);
+          setNespera(allNesperas.resData[0]);
         });
     }
     getNesperas();
-  }, []); */
+  }, []);
 
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: 'React Native | A framework for building native apps using React'
+        title: 'Preferias',
+        message: nesperaData['optionA'] + ' ou ' + nesperaData['optionB'] + '?'
       });
 
       if (result.action === Share.sharedAction) {
@@ -38,15 +43,15 @@ const StatsScreen = props => {
       alert(error.message);
     }
   };
-
+  const random1 = Math.floor(Math.random() * 20);
+  const random2 = Math.floor(Math.random() * 20);
   return (
     <View style={styles.container}>
       <VictoryPie
         colorScale={'qualitative'}
         data={[
-          { x: 'Cats', y: 35 },
-          { x: 'Dogs', y: 40 },
-          { x: 'Birds', y: 55 }
+          { x: nespera.optionA, y: random1 },
+          { x: nespera.optionB, y: random2 }
         ]}
       />
       <Button onPress={onShare} title="Share">

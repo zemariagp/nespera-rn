@@ -5,6 +5,8 @@ import { TextInput, Button } from 'react-native-paper';
 import Firebase from '../../config/Firebase';
 
 const TestScreen = props => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
@@ -23,10 +25,14 @@ const TestScreen = props => {
   };
 
   const handleSignup = () => {
+    setIsLoading(true);
+
     Firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         dispatch({ type: 'firebase signup success', payload: { name: name, email: email } });
+        setIsLoading(false);
+
         props.navigation.navigate('Main');
       })
       .catch(error => console.log(error));
@@ -43,6 +49,7 @@ const TestScreen = props => {
       ></TextInput>
       <TextInput label="password" onChangeText={handlePasswordInput} secureTextEntry></TextInput>
       <Button
+        loading={isLoading}
         mode="contained"
         onPress={() => {
           handleSignup();

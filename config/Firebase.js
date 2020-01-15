@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
 import {
   API_KEY,
   AUTH_DOMAIN,
@@ -16,9 +16,9 @@ const firebaseConfig = {
   storageBucket: '',
   messagingSenderId: MESSAGE_SENDER_ID,
   appId: APP_ID
-}
+};
 
 // Initialize Firebase
 let Firebase = firebase.initializeApp(firebaseConfig);
 
-export default Firebase
+export default Firebase;

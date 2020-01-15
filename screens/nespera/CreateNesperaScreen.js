@@ -34,19 +34,11 @@ const CreateNesperaScreen = props => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <TextInput
-        multiline={true}
-        placeholder="Título do Dilema"
-        onChangeText={text => setTitle(text)}
-      />
+      <TextInput placeholder="Título do Dilema" onChangeText={text => setTitle(text)} />
       <Text style={styles.preferias}>Preferias</Text>
-      <TextInput
-        multiline={true}
-        placeholder="Ex: Ser o Nuno Markl."
-        onChangeText={text => setOpA(text)}
-      />
+      <TextInput placeholder="Ex: Ser o Nuno Markl." onChangeText={text => setOpA(text)} />
       <Text style={styles.preferias}>ou</Text>
-      <TextInput multiline={true} placeholder="Ex: Ser Anão" onChangeText={text => setOpB(text)} />
+      <TextInput placeholder="Ex: Ser Anão" onChangeText={text => setOpB(text)} />
       <Button onPress={() => handleCreate()}>Criar</Button>
     </KeyboardAvoidingView>
   );

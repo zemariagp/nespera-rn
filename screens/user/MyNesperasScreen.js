@@ -11,7 +11,6 @@ const MyNesperasScreen = props => {
   const globalState = useContext(store);
   const user = globalState['state']['_55'];
 
-  console.log('user in screen', user);
   const handleCreate = () => {
     props.navigation.navigate('CreateNew');
   };

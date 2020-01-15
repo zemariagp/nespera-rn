@@ -32,6 +32,7 @@ const NesperasScreen = props => {
   return (
     <View style={styles.container}>
       <FlatList
+        style={styles.list}
         data={top}
         keyExtractor={item => item['_id'].toString()}
         renderItem={itemData => (
@@ -47,7 +48,7 @@ const NesperasScreen = props => {
         )}
       />
       <View style={styles.buttonContainer}>
-        <Button onPress={() => handleRandom()} mode="contained">
+        <Button onPress={() => {}} mode="contained">
           UM AO CALHAS
         </Button>
       </View>
@@ -60,7 +61,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 30
   },
-  buttonContainer: { flexDirection: 'row', justifyContent: 'center' }
+  buttonContainer: { flexDirection: 'row', justifyContent: 'center' },
+  list: {}
 });
 
 export default withNavigationFocus(NesperasScreen);

@@ -1,90 +1,94 @@
 import React, { useContext, useState } from 'react';
 import { store } from '../../store/store';
-import { View, StyleSheet, Image, Text, KeyboardAvoidingView } from "react-native";
+import { View, StyleSheet, Image, Text, KeyboardAvoidingView } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import Firebase from "../../config/Firebase";
+import Firebase from '../../config/Firebase';
 
-
-
-const TestScreen = (props) => {
+const TestScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
-
 
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
-
-  const [email, setEmail] = useState("");
-  const handleEmailInput = (email) => {
+  const [email, setEmail] = useState('');
+  const handleEmailInput = email => {
     setEmail(email);
-  }
-  const [password, setPassword] = useState("");
-  const handlePasswordInput = (password) => {
+  };
+  const [password, setPassword] = useState('');
+  const handlePasswordInput = password => {
     setPassword(password);
-  }
+  };
 
   const handleLogin = () => {
     setIsLoading(true);
 
     Firebase.auth()
       .signInWithEmailAndPassword(email.trim(), password.trim())
-      .then((res) => {
+      .then(res => {
         dispatch({ type: 'firebase login success', payload: email });
         setIsLoading(false);
-        props.navigation.navigate("Main");
+        props.navigation.navigate('Main');
       })
-      .catch(error => console.log(error))
-  }
-
-
+      .catch(error => console.log(error));
+  };
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <View style={styles.headerCont}>
-        <Image style={styles.image} source={{ uri: "https://vaiumaaposta.jellycast.com/files/UmaNesperaNoCu.jpg" }} />
+        <Image
+          style={styles.image}
+          source={{ uri: 'https://vaiumaaposta.jellycast.com/files/UmaNesperaNoCu.jpg' }}
+        />
 
-        <Text style={{ fontFamily: 'lora', fontSize: 30 }} >Uma nêspera no cu.</Text>
+        <Text style={{ fontFamily: 'lora', fontSize: 30 }}>Uma nêspera no cu.</Text>
         <Text>Aplicativo para maiores de 18 anos.</Text>
       </View>
       <View>
-        <TextInput label="email" keyboardType={"email-address"} autoCapitalize={"none"} onChangeText={handleEmailInput}></TextInput>
+        <TextInput
+          label="email"
+          keyboardType={'email-address'}
+          autoCapitalize={'none'}
+          onChangeText={handleEmailInput}
+        ></TextInput>
         <TextInput label="password" onChangeText={handlePasswordInput} secureTextEntry></TextInput>
-        <Button mode="contained" loading={isLoading} onPress={() => {
-          handleLogin();
-        }}>LOGIN</Button>
+        <Button
+          mode="contained"
+          loading={isLoading}
+          onPress={() => {
+            handleLogin();
+          }}
+        >
+          LOGIN
+        </Button>
         <View style={styles.buttonContainer}>
-
           <Text>ou</Text>
-          <Button onPress={() => props.navigation.navigate("Signup")} >SIGN UP</Button>
+          <Button onPress={() => props.navigation.navigate('Signup')}>SIGN UP</Button>
         </View>
       </View>
-    </KeyboardAvoidingView >
-  )
+    </KeyboardAvoidingView>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-evenly",
-    alignContent: "center",
-    backgroundColor: "white",
+    justifyContent: 'space-evenly',
+    alignContent: 'center',
+    backgroundColor: 'white',
     paddingHorizontal: 30
-
-
   },
   buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   image: {
-
-    width: 100, height: 100
+    width: 100,
+    height: 100
   },
   headerCont: {
-    alignItems: "center"
+    alignItems: 'center'
   }
+});
 
-})
-
-export default TestScreen
+export default TestScreen;
