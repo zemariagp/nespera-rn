@@ -11,9 +11,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/nespera.png",
+    "icon": "./assets/images/nespera2.png",
     "splash": {
-      "image": "./assets/images/nespera.png",
+      "image": "./assets/images/nespera2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
