@@ -38,6 +38,7 @@ const CustomListItem = props => {
         style={{ ...styles.card, backgroundColor: color }}
         title={props.nesperaData.title}
         description={'por ' + props.nesperaData.authorName}
+        right={'asd'}
       />
     </TouchableOpacity>
   );
