@@ -24,7 +24,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier":"com.zemaria.nespera"
     },
     "description": ""
   }
