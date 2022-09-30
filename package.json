@@ -42,8 +42,8 @@
     "react-navigation-stack": "~1.10.3",
     "react-navigation-tabs": "~2.6.2",
     "use-data-api": "^1.0.1",
-    "victory": "^34.0.0",
-    "victory-native": "^34.0.0",
+    "victory": "^36.6.8",
+    "victory-native": "^36.6.8",
     "yarn": "^1.21.1"
   },
   "devDependencies": {
